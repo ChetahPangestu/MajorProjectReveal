@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: 027bb5041c9a9084f99e302b346b4fd7
+timeCreated: 1475574608
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Coin
+    100002: Coin1
+    100004: Coin10
+    100006: Coin11
+    100008: Coin12
+    100010: Coin13
+    100012: Coin14
+    100014: Coin15
+    100016: Coin16
+    100018: Coin17
+    100020: Coin18
+    100022: Coin19
+    100024: Coin2
+    100026: Coin20
+    100028: Coin21
+    100030: Coin22
+    100032: Coin3
+    100034: Coin4
+    100036: Coin5
+    100038: Coin6
+    100040: Coin7
+    100042: Coin8
+    100044: Coin9
+    100046: //RootNode
+    100048: nurbsToPoly1
+    100050: Tag
+    400000: Coin
+    400002: Coin1
+    400004: Coin10
+    400006: Coin11
+    400008: Coin12
+    400010: Coin13
+    400012: Coin14
+    400014: Coin15
+    400016: Coin16
+    400018: Coin17
+    400020: Coin18
+    400022: Coin19
+    400024: Coin2
+    400026: Coin20
+    400028: Coin21
+    400030: Coin22
+    400032: Coin3
+    400034: Coin4
+    400036: Coin5
+    400038: Coin6
+    400040: Coin7
+    400042: Coin8
+    400044: Coin9
+    400046: //RootNode
+    400048: nurbsToPoly1
+    400050: Tag
+    2300000: Coin
+    2300002: Coin1
+    2300004: Coin10
+    2300006: Coin11
+    2300008: Coin12
+    2300010: Coin13
+    2300012: Coin14
+    2300014: Coin15
+    2300016: Coin16
+    2300018: Coin17
+    2300020: Coin18
+    2300022: Coin19
+    2300024: Coin2
+    2300026: Coin20
+    2300028: Coin21
+    2300030: Coin22
+    2300032: Coin3
+    2300034: Coin4
+    2300036: Coin5
+    2300038: Coin6
+    2300040: Coin7
+    2300042: Coin8
+    2300044: Coin9
+    2300046: nurbsToPoly1
+    2300048: Tag
+    3300000: Coin
+    3300002: Coin1
+    3300004: Coin10
+    3300006: Coin11
+    3300008: Coin12
+    3300010: Coin13
+    3300012: Coin14
+    3300014: Coin15
+    3300016: Coin16
+    3300018: Coin17
+    3300020: Coin18
+    3300022: Coin19
+    3300024: Coin2
+    3300026: Coin20
+    3300028: Coin21
+    3300030: Coin22
+    3300032: Coin3
+    3300034: Coin4
+    3300036: Coin5
+    3300038: Coin6
+    3300040: Coin7
+    3300042: Coin8
+    3300044: Coin9
+    3300046: nurbsToPoly1
+    3300048: Tag
+    4300000: Tag
+    4300002: Coin22
+    4300004: Coin12
+    4300006: Coin7
+    4300008: Coin1
+    4300010: Coin2
+    4300012: Coin
+    4300014: Coin3
+    4300016: Coin4
+    4300018: Coin5
+    4300020: Coin6
+    4300022: Coin8
+    4300024: Coin9
+    4300026: Coin10
+    4300028: Coin11
+    4300030: Coin13
+    4300032: Coin14
+    4300034: Coin15
+    4300036: Coin16
+    4300038: Coin17
+    4300040: Coin18
+    4300042: Coin19
+    4300044: Coin20
+    4300046: Coin21
+    4300048: nurbsToPoly1
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
