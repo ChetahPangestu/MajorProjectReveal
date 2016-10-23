@@ -4,7 +4,6 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class ItemInteractionScript : MonoBehaviour {
 
-	public GameObject[] selectableItem;
 	public GameObject[] interactiveItem;
 	private GameObject item;
 	private GameObject selectedItem;
@@ -12,7 +11,7 @@ public class ItemInteractionScript : MonoBehaviour {
 	public GameObject ui;
 	public GameObject itemHolder;
 	public GameObject lights;
-//	private int selected;
+	private int selected;
 	public bool extraLightsOn;
 	private bool interacting;
 	private bool movingItem;
@@ -20,6 +19,7 @@ public class ItemInteractionScript : MonoBehaviour {
 	private float horizontalSpeed;
 	private float verticalSpeed;
 	private bool test;
+	private GameObject testObject;
 
 	// Use this for initialization
 	void Start () {
@@ -29,10 +29,6 @@ public class ItemInteractionScript : MonoBehaviour {
 		ui.SetActive (false);
 		horizontalSpeed = 2.0f;
 		verticalSpeed = 2.0f;
-//		selectableItem [0] = GameObject.FindGameObjectWithTag ("Jar");
-//		selectableItem [1] = GameObject.FindGameObjectWithTag ("Coin");
-//		selectableItem [2] = GameObject.FindGameObjectWithTag ("Knife");
-//		selectableItem [3] = GameObject.FindGameObjectWithTag ("");
 	}
 
 	// Update is called once per frame
@@ -47,38 +43,42 @@ public class ItemInteractionScript : MonoBehaviour {
 				ui.SetActive (false);
 				interacting = true;
 				gameObject.GetComponent<FirstPersonController> ().enabled	= false;
+
+				Camera.main.transform.LookAt (itemHolder.transform.position);
+
 				if (selecting == "Jar") {
-					selectedItem.SetActive (false);
-					item.SetActive (true);
+					testObject.SetActive (false);
+					interactiveItem [selected].SetActive (true);
 				}
 				if (selecting == "Coin") {
-					selectedItem.SetActive (false);
-					item.SetActive (true);
+					testObject.SetActive (false);
+					interactiveItem [selected].SetActive (true);
 				}
 				if (selecting == "Knife") {
-					selectedItem.SetActive (false);
-					item.SetActive (true);
+					testObject.SetActive (false);
+					interactiveItem [selected].SetActive (true);
 				}
 			}
 
 			//Stop interacting
-			else if (Input.GetKeyDown (KeyCode.E) && interacting == true && movingItem == false) {
-				Debug.LogError ("Does this");
+			else if (Input.GetKeyDown (KeyCode.E) && interacting == true) {
+				movingItem = false;
 				lights.SetActive (false);
 				ui.SetActive (true);
 				interacting = false;
 				gameObject.GetComponent<FirstPersonController> ().enabled	= true;
+
 				if (selecting == "Jar") {
-					selectedItem.SetActive (true);
-					item.SetActive (false);
+					testObject.SetActive (true);
+					interactiveItem [selected].SetActive (false);
 				}
 				if (selecting == "Coin") {
-					selectedItem.SetActive (true);
-					item.SetActive (false);
+					testObject.SetActive (true);
+					interactiveItem [selected].SetActive (false);
 				}
 				if (selecting == "Knife") {
-					selectedItem.SetActive (true);
-					item.SetActive (false);
+					testObject.SetActive (true);
+					interactiveItem [selected].SetActive (false);
 				}
 			}
 
@@ -92,12 +92,10 @@ public class ItemInteractionScript : MonoBehaviour {
 			}
 
 			if (movingItem == true) {
-				Debug.Log ("working");
 				float a = horizontalSpeed * -1 * Input.GetAxis ("Mouse X");
-				float s = verticalSpeed * -1 * Input.GetAxis ("Mouse Y");
-				Debug.Log ("X " + a + ", "+ "Y "+ s);
-				itemHolder.transform.Rotate (0, a, 0);
-				item.transform.Rotate (s, 0, 0);
+				float s = verticalSpeed * Input.GetAxis ("Mouse Y");
+				interactiveItem [selected].transform.Rotate (0, a, 0);
+				itemHolder.transform.Rotate (s, 0, 0);
 			}
 		}
 	}
@@ -107,16 +105,16 @@ public class ItemInteractionScript : MonoBehaviour {
 		selecting = other.tag;
 		ui.SetActive (true);
 		if (other.tag == "Jar") {
-			item = interactiveItem [0];
-			selectedItem = selectableItem [0];
+			testObject = GameObject.FindGameObjectWithTag (other.tag);
+			selected = 0;
 		}
 		else if (other.tag == "Coin") {
-			item = interactiveItem [1];
-			selectedItem = selectableItem [1];
+			testObject = GameObject.FindGameObjectWithTag (other.tag);
+			selected = 1;
 		}
 		else if (other.tag == "Knife") {
-			item = interactiveItem [2];
-			selectedItem = selectableItem [2];
+			testObject = GameObject.FindGameObjectWithTag (other.tag);
+			selected = 2;
 		}
 	}
 
