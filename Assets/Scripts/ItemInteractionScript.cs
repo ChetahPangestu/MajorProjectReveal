@@ -10,9 +10,7 @@ public class ItemInteractionScript : MonoBehaviour {
 	private string selecting;
 	public GameObject ui;
 	public GameObject itemHolder;
-	public GameObject lights;
 	private int selected;
-	public bool extraLightsOn;
 	private bool interacting;
 	private bool movingItem;
 	private bool inTrigger;
@@ -37,9 +35,6 @@ public class ItemInteractionScript : MonoBehaviour {
 		if (inTrigger == true) {
 			//Start interacting
 			if (Input.GetKeyDown (KeyCode.E) && interacting == false) {
-				if (extraLightsOn == true) {
-					lights.SetActive (true);
-				}
 				ui.SetActive (false);
 				interacting = true;
 				gameObject.GetComponent<FirstPersonController> ().enabled	= false;
@@ -63,7 +58,6 @@ public class ItemInteractionScript : MonoBehaviour {
 			//Stop interacting
 			else if (Input.GetKeyDown (KeyCode.E) && interacting == true) {
 				movingItem = false;
-				lights.SetActive (false);
 				ui.SetActive (true);
 				interacting = false;
 				gameObject.GetComponent<FirstPersonController> ().enabled	= true;
