@@ -4,68 +4,89 @@ using System.Collections;
 public class FurnatureInteractionScript : MonoBehaviour {
 
 	//set whether to swing left, right or slide foward
-	public string moveType;
-	private bool colliding;
+	public string interactionType;
+	public bool colliding;
 	private bool open;
 
 	private float openAngle;
 
-	public GameObject hinge;
-//	public GameObject UI;
+	public GameObject interactingObject;
+	public GameObject moveFromPoint;
+	public GameObject moveToPoint;
 
 	private float xPosition;
+	private float xMoveToPosition;
 	private float yPosition;
 	private float zPosition;
+
+	private Vector3 startingPosition;
+	private Vector3 moveToPosition;
+
+	private float startTime;
+	private float journeyLength;
+	private float speed = 0.001F;
+	public float speedActual;
 
 
 	// Use this for initialization
 	void Start () {
+		speedActual = speed * Time.deltaTime;
 
-		xPosition = hinge.transform.position.x;
-		yPosition = hinge.transform.position.y;
-		zPosition = hinge.transform.position.z;
-
-		if (moveType == "left") {
+		if (interactionType == "turn left") {
 			openAngle = 80.0f;
-		} else if (moveType == "right") {
+		} else if (interactionType == "turn right") {
 			openAngle = -80.0f;
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		if (moveType == "slide") {
+		
+		//Draws
+		if (interactionType == "slide" && colliding == true) {
 			//open
-			if (Input.GetKeyDown (KeyCode.E) && colliding == true && open == false) {
-				hinge.transform.position = new Vector3 (xPosition - 1.0f, yPosition, zPosition);
+			if (Input.GetKeyDown (KeyCode.E) && open == false) {
+
+				interactingObject.transform.position = Vector3.Lerp(moveFromPoint.transform.position, moveToPoint.transform.position, speed * Time.deltaTime);
+
 				open = true;
 			}
 			//close
-			else if (Input.GetKeyDown (KeyCode.E) && colliding == true && open == true) {
-				hinge.transform.position = new Vector3 (xPosition, yPosition, zPosition);
+			else if (Input.GetKeyDown (KeyCode.E) && open == true) {
+
+				interactingObject.transform.position = Vector3.Lerp(moveToPoint.transform.position, moveFromPoint.transform.position, speed * Time.deltaTime);
+
 				open = false;
 			}
 		}
 
-		if (moveType != "slide") {
+		//Cubbards
+		else if ((interactionType == "turn left" || interactionType == "turn right") && colliding == true) {
 			//open
-			if (Input.GetKeyDown (KeyCode.E) && colliding == true && open == false) {
-				hinge.transform.eulerAngles = new Vector3 (0, openAngle, 0);
+			if (Input.GetKeyDown (KeyCode.E) && open == false) {
+				interactingObject.transform.eulerAngles = new Vector3 (0, openAngle, 0);
 				open = true;
 			}
 			//close
-			else if (Input.GetKeyDown (KeyCode.E) && colliding == true && open == true) {
-				hinge.transform.eulerAngles = new Vector3 (0, 0, 0);
+			else if (Input.GetKeyDown (KeyCode.E) && open == true) {
+				interactingObject.transform.eulerAngles = new Vector3 (0, 0, 0);
 				open = false;
 			}
 		}
-	}
-	void OnTriggerEnter(){
-		colliding = true;
-	}
 
-	void OnTriggerExit(){
+		//Lights
+		else if (interactionType == "switch" && colliding == true) {
+			//on
+			if (Input.GetKeyDown (KeyCode.E) && open == false) {
+				interactingObject.SetActive (true);
+				open = true;
+			}
+			//off
+			else if (Input.GetKeyDown (KeyCode.E) && open == true) {
+				interactingObject.SetActive (false);
+				open = false;
+			}
+		}
 		colliding = false;
 	}
 }

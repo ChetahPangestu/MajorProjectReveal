@@ -4,116 +4,62 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class ItemInteractionScript : MonoBehaviour {
 
-	public GameObject[] interactiveItem;
-	private GameObject item;
-	private GameObject selectedItem;
-	private string selecting;
-	public GameObject ui;
-	public GameObject itemHolder;
-	private int selected;
-	private bool interacting;
-	private bool movingItem;
-	private bool inTrigger;
-	private float horizontalSpeed;
-	private float verticalSpeed;
-	private bool test;
-	private GameObject testObject;
+	public GameObject player;
+	public bool inTrigger;
+	public bool interacting;
+	public GameObject UIExamine;
+	public int selected;
+	public GameObject objectHolder;
+	public GameObject[] interactingObjects;
 
-	// Use this for initialization
-	void Start () {
-		
-		interacting = false;
-		inTrigger = false;
-		ui.SetActive (false);
-		horizontalSpeed = 2.0f;
-		verticalSpeed = 2.0f;
-	}
 
-	// Update is called once per frame
+	private bool movingObject;
+	private float horizontalSpeed = 2.0f;
+	private float verticalSpeed = 2.0f;
+
+
 	void Update () {
 		
 		if (inTrigger == true) {
+			UIExamine.SetActive (true);
 			//Start interacting
 			if (Input.GetKeyDown (KeyCode.E) && interacting == false) {
-				ui.SetActive (false);
+				UIExamine.SetActive (false);
+//				inTrigger = true;
 				interacting = true;
-				gameObject.GetComponent<FirstPersonController> ().enabled	= false;
+				player.GetComponent<FirstPersonController> ().enabled = false;
 
-				Camera.main.transform.LookAt (itemHolder.transform.position);
-
-				if (selecting == "Jar") {
-					testObject.SetActive (false);
-					interactiveItem [selected].SetActive (true);
-				}
-				if (selecting == "Coin") {
-					testObject.SetActive (false);
-					interactiveItem [selected].SetActive (true);
-				}
-				if (selecting == "Knife") {
-					testObject.SetActive (false);
-					interactiveItem [selected].SetActive (true);
-				}
+				Camera.main.transform.LookAt (objectHolder.transform.position);
+				interactingObjects [selected].SetActive (true);
 			}
 
 			//Stop interacting
 			else if (Input.GetKeyDown (KeyCode.E) && interacting == true) {
-				movingItem = false;
-				ui.SetActive (true);
+				movingObject = false;
+				UIExamine.SetActive (true);
 				interacting = false;
-				gameObject.GetComponent<FirstPersonController> ().enabled	= true;
-
-				if (selecting == "Jar") {
-					testObject.SetActive (true);
-					interactiveItem [selected].SetActive (false);
-				}
-				if (selecting == "Coin") {
-					testObject.SetActive (true);
-					interactiveItem [selected].SetActive (false);
-				}
-				if (selecting == "Knife") {
-					testObject.SetActive (true);
-					interactiveItem [selected].SetActive (false);
-				}
+				player.GetComponent<FirstPersonController> ().enabled = true;
+				interactingObjects [selected].SetActive (false);
 			}
 
 			if (interacting == true) {
-				if (Input.GetKeyDown (KeyCode.Q) && movingItem == false) {
-					movingItem = true;
+				//enable movement
+				if (Input.GetButtonDown ("Fire1") && movingObject == false) {
+					movingObject = true;
 				}
-				else if (Input.GetKeyDown (KeyCode.Q) && movingItem == true) {
-					movingItem = false;
+				//disable movement
+				else if (Input.GetButtonUp("Fire1") && movingObject == true) {
+					movingObject = false;
 				}
 			}
 
-			if (movingItem == true) {
+			//move object
+			if (movingObject == true) {
 				float a = horizontalSpeed * -1 * Input.GetAxis ("Mouse X");
 				float s = verticalSpeed * Input.GetAxis ("Mouse Y");
-				interactiveItem [selected].transform.Rotate (0, a, 0);
-				itemHolder.transform.Rotate (s, 0, 0);
+				interactingObjects [selected].transform.Rotate (0, a, 0);
+				objectHolder.transform.Rotate (s, 0, 0);
 			}
 		}
-	}
-
-	void OnTriggerEnter(Collider other){
-		inTrigger = true;
-		selecting = other.tag;
-		ui.SetActive (true);
-		if (other.tag == "Jar") {
-			testObject = GameObject.FindGameObjectWithTag (other.tag);
-			selected = 0;
-		}
-		else if (other.tag == "Coin") {
-			testObject = GameObject.FindGameObjectWithTag (other.tag);
-			selected = 1;
-		}
-		else if (other.tag == "Knife") {
-			testObject = GameObject.FindGameObjectWithTag (other.tag);
-			selected = 2;
-		}
-	}
-
-	void OnTriggerExit(){
-		inTrigger = false;
-		ui.SetActive (false);
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class SceneSwitch : MonoBehaviour {
 
@@ -7,6 +8,6 @@ public class SceneSwitch : MonoBehaviour {
 
 	void OnMouseDown()
 	{
-		Application.LoadLevel (myScene);
+		SceneManager.LoadScene (myScene);
 	}
 }
