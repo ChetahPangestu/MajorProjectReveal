@@ -8,13 +8,14 @@ public class ItemInteractionScript : MonoBehaviour {
 	public bool inTrigger;
 	public bool interacting;
 	public GameObject UIExamine;
+	public GameObject InteractingCam;
 	public int selected;
 	public GameObject objectHolder;
 	public GameObject[] interactingObjects;
 
 	public AudioClip[] voiceLine;
 
-	private bool movingObject;
+	public bool movingObject;
 	private float horizontalSpeed = 2.0f;
 	private float verticalSpeed = 2.0f;
 
@@ -24,11 +25,12 @@ public class ItemInteractionScript : MonoBehaviour {
 			
 			//Start interacting
 			if (Input.GetKeyDown (KeyCode.E) && interacting == false) {
-				UIExamine.SetActive (false);
 				interacting = true;
-				player.GetComponent<FirstPersonController> ().enabled = false;
-
-				Camera.main.transform.LookAt (objectHolder.transform.position);
+				gameObject.GetComponent<Camera> ().enabled = false;
+				gameObject.GetComponent<AudioListener> ().enabled = false;
+				player.GetComponent<FirstPersonController> ().cameraLocked = true;
+				player.GetComponent<CharacterController> ().enabled = false;
+				InteractingCam.SetActive (true);
 				AudioSource audio = GetComponent<AudioSource>();
 				audio.clip = voiceLine [selected];
 				audio.Play ();
@@ -38,19 +40,23 @@ public class ItemInteractionScript : MonoBehaviour {
 			//Stop interacting
 			else if (Input.GetKeyDown (KeyCode.E) && interacting == true) {
 				movingObject = false;
-				UIExamine.SetActive (true);
 				interacting = false;
-				player.GetComponent<FirstPersonController> ().enabled = true;
+				gameObject.GetComponent<Camera> ().enabled = true;
+				gameObject.GetComponent<AudioListener> ().enabled = true;
+				player.GetComponent<FirstPersonController> ().cameraLocked = false;
+				player.GetComponent<CharacterController> ().enabled = true;
+				InteractingCam.SetActive (false);
 				interactingObjects [selected].SetActive (false);
 			}
 
 			if (interacting == true) {
 				//enable movement
+				UIExamine.SetActive(false);
 				if (Input.GetButtonDown ("Fire1") && movingObject == false) {
 					movingObject = true;
 				}
 				//disable movement
-				else if (Input.GetButtonUp("Fire1") && movingObject == true) {
+				else if (Input.GetButtonUp ("Fire1") && movingObject == true) {
 					movingObject = false;
 				}
 
@@ -63,8 +69,8 @@ public class ItemInteractionScript : MonoBehaviour {
 			if (movingObject == true) {
 				float a = horizontalSpeed * -1 * Input.GetAxis ("Mouse X");
 				float s = verticalSpeed * Input.GetAxis ("Mouse Y");
-				interactingObjects [selected].transform.Rotate (0, a, 0);
-				objectHolder.transform.Rotate (s, 0, 0);
+				interactingObjects [selected].transform.Rotate (s, 0, 0);
+				objectHolder.transform.Rotate (0, a, 0);
 			}
 		}
 	}

@@ -33,9 +33,9 @@ public class FurnatureInteractionScript : MonoBehaviour {
 		speedActual = speed * Time.deltaTime;
 
 		if (interactionType == "turn left") {
-			openAngle = 80.0f;
+			openAngle = 180.0f;
 		} else if (interactionType == "turn right") {
-			openAngle = -80.0f;
+			openAngle = 0.0f;
 		}
 	}
 	
@@ -69,7 +69,7 @@ public class FurnatureInteractionScript : MonoBehaviour {
 			}
 			//close
 			else if (Input.GetKeyDown (KeyCode.E) && open == true) {
-				interactingObject.transform.eulerAngles = new Vector3 (0, 0, 0);
+				interactingObject.transform.eulerAngles = new Vector3 (0, 90.0f, 0);
 				open = false;
 			}
 		}
