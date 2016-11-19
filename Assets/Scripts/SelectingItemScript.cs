@@ -3,6 +3,10 @@ using System.Collections;
 
 public class SelectingItemScript : MonoBehaviour {
 
+	//Debug
+	public GameObject debugLight;
+	private bool debugLightOn;
+
 	//Furnature Interaction
 	public bool interacting;
 	public GameObject UIActivate;
@@ -12,6 +16,16 @@ public class SelectingItemScript : MonoBehaviour {
 	public GameObject defaultObject;
 
 	void Update () {
+
+		if (Input.GetKeyDown (KeyCode.P) && debugLightOn == false) {
+			debugLight.SetActive (true);
+			debugLightOn = true;
+		} else if (Input.GetKeyDown (KeyCode.P) && debugLightOn == true) {
+			debugLight.SetActive (false);
+			debugLightOn = false;
+		}
+
+
 
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit rch;
@@ -52,23 +66,29 @@ public class SelectingItemScript : MonoBehaviour {
 			interacting = true;
 		}
 		//Plot Objects
-		else if (selectedObject == "Jar" || selectedObject == "Diary" || selectedObject == "Token" || selectedObject == "Knife" || selectedObject == "Umbrella") {
-			gameObject.GetComponent<ItemInteractionScript> ().inTrigger = true;
-			if (selectedObject == "Jar") {
+		else if (selectedObject == "Jar" || selectedObject == "Diary" || selectedObject == "Token" || selectedObject == "Knife" || selectedObject == "Umbrella" && gameObject.GetComponent<ItemInteractionScript> ().inTrigger != true) {
+			gameObject.GetComponent<ItemInteractionScript> ().UIExamine.SetActive (true);
+			if (selectedObject == "Diary") {
 				gameObject.GetComponent<ItemInteractionScript> ().selected = 0;
-			}
-			else if (selectedObject == "Diary") {
-				gameObject.GetComponent<ItemInteractionScript> ().selected = 1;
+				gameObject.GetComponent<ItemInteractionScript> ().inTrigger = true;
 			}
 			else if (selectedObject == "Token") {
+				gameObject.GetComponent<ItemInteractionScript> ().selected = 1;
+				gameObject.GetComponent<ItemInteractionScript> ().inTrigger = true;
+			}
+			else if (selectedObject == "Jar") {
 				gameObject.GetComponent<ItemInteractionScript> ().selected = 2;
+				gameObject.GetComponent<ItemInteractionScript> ().inTrigger = true;
 			}
 			else if (selectedObject == "Knife") {
 				gameObject.GetComponent<ItemInteractionScript> ().selected = 3;
+				gameObject.GetComponent<ItemInteractionScript> ().inTrigger = true;
 			}
 			else if (selectedObject == "Umbrella") {
 				gameObject.GetComponent<ItemInteractionScript> ().selected = 4;
+				gameObject.GetComponent<ItemInteractionScript> ().inTrigger = true;
 			}
+
 		}
 
 		else {

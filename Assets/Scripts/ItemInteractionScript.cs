@@ -12,24 +12,26 @@ public class ItemInteractionScript : MonoBehaviour {
 	public GameObject objectHolder;
 	public GameObject[] interactingObjects;
 
+	public AudioClip[] voiceLine;
 
 	private bool movingObject;
 	private float horizontalSpeed = 2.0f;
 	private float verticalSpeed = 2.0f;
 
-
 	void Update () {
 		
 		if (inTrigger == true) {
-			UIExamine.SetActive (true);
+			
 			//Start interacting
 			if (Input.GetKeyDown (KeyCode.E) && interacting == false) {
 				UIExamine.SetActive (false);
-//				inTrigger = true;
 				interacting = true;
 				player.GetComponent<FirstPersonController> ().enabled = false;
 
 				Camera.main.transform.LookAt (objectHolder.transform.position);
+				AudioSource audio = GetComponent<AudioSource>();
+				audio.clip = voiceLine [selected];
+				audio.Play ();
 				interactingObjects [selected].SetActive (true);
 			}
 
@@ -49,6 +51,10 @@ public class ItemInteractionScript : MonoBehaviour {
 				}
 				//disable movement
 				else if (Input.GetButtonUp("Fire1") && movingObject == true) {
+					movingObject = false;
+				}
+
+				if (Input.GetKeyDown (KeyCode.Q)) {
 					movingObject = false;
 				}
 			}
