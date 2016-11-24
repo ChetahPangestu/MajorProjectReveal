@@ -124,6 +124,12 @@ public class SelectingItemScript : MonoBehaviour {
 				gameObject.GetComponent<ItemInteractionScript> ().selected = 6;
 				gameObject.GetComponent<ItemInteractionScript> ().inTrigger = true;
 			}
+
+			//extra: late slip
+			else if (selectedObject == "Late slip") {
+				gameObject.GetComponent<ItemInteractionScript> ().selected = 7;
+				gameObject.GetComponent<ItemInteractionScript> ().inTrigger = true;
+			}
 		}
 
 		else {

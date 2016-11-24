@@ -27,6 +27,10 @@ public class FurnatureInteractionScript : MonoBehaviour {
 	private float speed = 0.001F;
 	public float speedActual;
 
+	public AudioClip[] objectActivationSound;
+	public AudioClip[] objectDeactivationSound;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -46,17 +50,19 @@ public class FurnatureInteractionScript : MonoBehaviour {
 		if (interactionType == "slide" && colliding == true) {
 			//open
 			if (Input.GetKeyDown (KeyCode.E) && open == false) {
-
 				interactingObject.transform.position = Vector3.Lerp(moveFromPoint.transform.position, moveToPoint.transform.position, speed * Time.deltaTime);
-
 				open = true;
+				AudioSource audio = GetComponent<AudioSource>();
+				audio.clip = objectActivationSound [1];
+				audio.Play ();
 			}
 			//close
 			else if (Input.GetKeyDown (KeyCode.E) && open == true) {
-
 				interactingObject.transform.position = Vector3.Lerp(moveToPoint.transform.position, moveFromPoint.transform.position, speed * Time.deltaTime);
-
 				open = false;
+				AudioSource audio = GetComponent<AudioSource>();
+				audio.clip = objectDeactivationSound [1];
+				audio.Play ();
 			}
 		}
 
@@ -80,11 +86,17 @@ public class FurnatureInteractionScript : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.E) && open == false) {
 				interactingObject.SetActive (true);
 				open = true;
+				AudioSource audio = GetComponent<AudioSource>();
+				audio.clip = objectActivationSound [2];
+				audio.Play ();
 			}
 			//off
 			else if (Input.GetKeyDown (KeyCode.E) && open == true) {
 				interactingObject.SetActive (false);
 				open = false;
+				AudioSource audio = GetComponent<AudioSource>();
+				audio.clip = objectDeactivationSound [2];
+				audio.Play ();
 			}
 		}
 		colliding = false;

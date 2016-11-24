@@ -19,6 +19,9 @@ public class ItemInteractionScript : MonoBehaviour {
 	private float horizontalSpeed = 2.0f;
 	private float verticalSpeed = 2.0f;
 
+	public AudioClip[] itemPickUpSound;
+	public AudioClip[] itemPutDownSound;
+
 	void Update () {
 		
 		if (inTrigger == true) {
@@ -35,6 +38,12 @@ public class ItemInteractionScript : MonoBehaviour {
 				audio.clip = voiceLine [selected];
 				audio.Play ();
 				interactingObjects [selected].SetActive (true);
+
+				if(selected == 5 || selected == 6 || selected == 7){
+					AudioSource audioInteract = GetComponent<AudioSource>();
+					audioInteract.clip = itemPickUpSound [1];
+					audioInteract.Play ();
+				}
 			}
 
 			//Stop interacting
@@ -47,6 +56,13 @@ public class ItemInteractionScript : MonoBehaviour {
 				player.GetComponent<CharacterController> ().enabled = true;
 				InteractingCam.SetActive (false);
 				interactingObjects [selected].SetActive (false);
+
+
+				if(selected == 5 || selected == 6 || selected == 7){
+					AudioSource audioInteract = GetComponent<AudioSource>();
+					audioInteract.clip = itemPutDownSound [1];
+					audioInteract.Play ();
+				}
 			}
 
 			if (interacting == true) {
