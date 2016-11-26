@@ -11,30 +11,29 @@ public class FurnatureInteractionScript : MonoBehaviour {
 	private float openAngle;
 
 	public GameObject interactingObject;
-	public GameObject moveFromPoint;
-	public GameObject moveToPoint;
 
 	private float xPosition;
 	private float xMoveToPosition;
 	private float yPosition;
 	private float zPosition;
 
-	private Vector3 startingPosition;
-	private Vector3 moveToPosition;
-
-	private float startTime;
-	private float journeyLength;
-	private float speed = 0.001F;
-	public float speedActual;
-
 	public AudioClip[] objectActivationSound;
 	public AudioClip[] objectDeactivationSound;
 
+	public bool opening;
+	public bool closing;
 
+	public Transform startMarker;
+	public Transform endMarker;
+	private float speed = 1.0f;
+	public float startTime;
+	public float journeyLength;
 
 	// Use this for initialization
 	void Start () {
-		speedActual = speed * Time.deltaTime;
+		if (interactionType == "slide") {
+			journeyLength = Vector3.Distance (startMarker.position, endMarker.position);
+		}
 
 		if (interactionType == "turn left") {
 			openAngle = 180.0f;
@@ -48,23 +47,50 @@ public class FurnatureInteractionScript : MonoBehaviour {
 		
 		//Draws
 		if (interactionType == "slide" && colliding == true) {
-			//open
 			if (Input.GetKeyDown (KeyCode.E) && open == false) {
-				interactingObject.transform.position = Vector3.Lerp(moveFromPoint.transform.position, moveToPoint.transform.position, speed * Time.deltaTime);
-				open = true;
-				AudioSource audio = GetComponent<AudioSource>();
-				audio.clip = objectActivationSound [1];
-				audio.Play ();
+				if (opening == false) {
+					startTime = Time.time;
+					opening = true;
+					AudioSource audio = GetComponent<AudioSource>();
+					audio.clip = objectActivationSound [0];
+					audio.Play ();
+				}
 			}
-			//close
 			else if (Input.GetKeyDown (KeyCode.E) && open == true) {
-				interactingObject.transform.position = Vector3.Lerp(moveToPoint.transform.position, moveFromPoint.transform.position, speed * Time.deltaTime);
-				open = false;
-				AudioSource audio = GetComponent<AudioSource>();
-				audio.clip = objectDeactivationSound [1];
-				audio.Play ();
+				if (closing == false) {
+					startTime = Time.time;
+					closing = true;
+					AudioSource audio = GetComponent<AudioSource>();
+					audio.clip = objectDeactivationSound [0];
+					audio.Play ();
+				}
 			}
 		}
+
+		//Open Draws
+		if (interactionType == "slide" && opening == true) {
+			float distCovered = (Time.time - startTime) * (speed -0.5f);
+			float fracJourney = distCovered / journeyLength;
+			interactingObject.transform.position = Vector3.Lerp (startMarker.position, endMarker.position, fracJourney);
+		}
+
+		if (interactionType == "slide" && interactingObject.transform.position == endMarker.position) {
+			opening = false;
+			open = true;
+		}
+
+		//Close Draws
+		if (interactionType == "slide" && closing == true) {
+			float distCovered = (Time.time - startTime) * speed;
+			float fracJourney = distCovered / journeyLength;
+			interactingObject.transform.position = Vector3.Lerp (endMarker.position, startMarker.position, fracJourney);
+		}
+
+		if (interactionType == "slide" && interactingObject.transform.position == startMarker.position) {
+			closing = false;
+			open = false;
+		}
+
 
 		//Cubbards
 		else if ((interactionType == "turn left" || interactionType == "turn right") && colliding == true) {
@@ -85,20 +111,26 @@ public class FurnatureInteractionScript : MonoBehaviour {
 			//on
 			if (Input.GetKeyDown (KeyCode.E) && open == false) {
 				interactingObject.SetActive (true);
+				Debug.Log ("turns on");
 				open = true;
 				AudioSource audio = GetComponent<AudioSource>();
-				audio.clip = objectActivationSound [2];
+				audio.clip = objectActivationSound [1];
 				audio.Play ();
 			}
 			//off
 			else if (Input.GetKeyDown (KeyCode.E) && open == true) {
 				interactingObject.SetActive (false);
+				Debug.Log ("turns off");
 				open = false;
 				AudioSource audio = GetComponent<AudioSource>();
-				audio.clip = objectDeactivationSound [2];
+				audio.clip = objectDeactivationSound [1];
 				audio.Play ();
 			}
 		}
 		colliding = false;
+	}
+
+
+	void CodeHolder(){
 	}
 }
