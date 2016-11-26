@@ -34,14 +34,14 @@ public class ItemInteractionScript : MonoBehaviour {
 				player.GetComponent<FirstPersonController> ().cameraLocked = true;
 				player.GetComponent<CharacterController> ().enabled = false;
 				InteractingCam.SetActive (true);
-				AudioSource audio = GetComponent<AudioSource>();
-				audio.clip = voiceLine [selected];
-				audio.Play ();
+//				AudioSource audio = GetComponent<AudioSource>();
+//				audio.clip = voiceLine [selected];
+//				audio.Play ();
 				interactingObjects [selected].SetActive (true);
 
 				if(selected == 5 || selected == 6 || selected == 7){
 					AudioSource audioInteract = GetComponent<AudioSource>();
-					audioInteract.clip = itemPickUpSound [1];
+					audioInteract.clip = itemPickUpSound [0];
 					audioInteract.Play ();
 				}
 			}
@@ -60,7 +60,7 @@ public class ItemInteractionScript : MonoBehaviour {
 
 				if(selected == 5 || selected == 6 || selected == 7){
 					AudioSource audioInteract = GetComponent<AudioSource>();
-					audioInteract.clip = itemPutDownSound [1];
+					audioInteract.clip = itemPutDownSound [0];
 					audioInteract.Play ();
 				}
 			}
