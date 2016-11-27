@@ -7,7 +7,6 @@ public class ItemInteractionScript : MonoBehaviour {
 	public GameObject player;
 	public bool inTrigger;
 	public bool interacting;
-	public GameObject UIExamine;
 	public GameObject InteractingCam;
 	public int selected;
 	public GameObject objectHolder;
@@ -19,8 +18,8 @@ public class ItemInteractionScript : MonoBehaviour {
 	private float horizontalSpeed = 2.0f;
 	private float verticalSpeed = 2.0f;
 
-	public AudioClip[] itemPickUpSound;
-	public AudioClip[] itemPutDownSound;
+	public AudioClip itemPickUpSound;
+	public AudioClip itemPutDownSound;
 
 	void Update () {
 		
@@ -34,14 +33,11 @@ public class ItemInteractionScript : MonoBehaviour {
 				player.GetComponent<FirstPersonController> ().cameraLocked = true;
 				player.GetComponent<CharacterController> ().enabled = false;
 				InteractingCam.SetActive (true);
-//				AudioSource audio = GetComponent<AudioSource>();
-//				audio.clip = voiceLine [selected];
-//				audio.Play ();
 				interactingObjects [selected].SetActive (true);
 
 				if(selected == 5 || selected == 6 || selected == 7){
 					AudioSource audioInteract = GetComponent<AudioSource>();
-					audioInteract.clip = itemPickUpSound [0];
+					audioInteract.clip = itemPickUpSound;
 					audioInteract.Play ();
 				}
 			}
@@ -57,26 +53,20 @@ public class ItemInteractionScript : MonoBehaviour {
 				InteractingCam.SetActive (false);
 				interactingObjects [selected].SetActive (false);
 
-
 				if(selected == 5 || selected == 6 || selected == 7){
 					AudioSource audioInteract = GetComponent<AudioSource>();
-					audioInteract.clip = itemPutDownSound [0];
+					audioInteract.clip = itemPutDownSound;
 					audioInteract.Play ();
 				}
 			}
 
 			if (interacting == true) {
 				//enable movement
-				UIExamine.SetActive(false);
 				if (Input.GetButtonDown ("Fire1") && movingObject == false) {
 					movingObject = true;
 				}
 				//disable movement
 				else if (Input.GetButtonUp ("Fire1") && movingObject == true) {
-					movingObject = false;
-				}
-
-				if (Input.GetKeyDown (KeyCode.Q)) {
 					movingObject = false;
 				}
 			}
