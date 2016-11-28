@@ -1,0 +1,169 @@
+fileFormatVersion: 2
+guid: 21cca9ae6a7287b4da316f8601bb3bcf
+timeCreated: 1480300630
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bn_L_arm01
+    100002: Bn_L_Index_A01
+    100004: Bn_L_Index_B01
+    100006: Bn_L_Index_C01
+    100008: Bn_L_Index_D01
+    100010: Bn_L_mid_A01
+    100012: Bn_L_mid_B01
+    100014: Bn_L_mid_C01
+    100016: Bn_L_palm01
+    100018: Bn_L_pinkie_A01
+    100020: Bn_L_pinkie_B01
+    100022: Bn_L_pinkie_C01
+    100024: Bn_L_ring_A01
+    100026: Bn_L_ring_B01
+    100028: Bn_L_ring_C01
+    100030: Bn_L_thumb_A01
+    100032: Bn_L_thumb_B01
+    100034: Bn_L_thumb_C01
+    100036: Bn_L_wrist_01
+    100038: Bn_R_arm01
+    100040: Bn_R_Index_A01
+    100042: Bn_R_Index_B01
+    100044: Bn_R_Index_C01
+    100046: Bn_R_Index_D01
+    100048: Bn_R_mid_A01
+    100050: Bn_R_mid_B01
+    100052: Bn_R_mid_C01
+    100054: Bn_R_palm01
+    100056: Bn_R_pinkie_A01
+    100058: Bn_R_pinkie_B01
+    100060: Bn_R_pinkie_C01
+    100062: Bn_R_ring_A01
+    100064: Bn_R_ring_B01
+    100066: Bn_R_ring_C01
+    100068: Bn_R_thumb_A01
+    100070: Bn_R_thumb_B01
+    100072: Bn_R_thumb_C01
+    100074: Bn_R_wrist_01
+    100076: CC_L_arm01
+    100078: CC_L_arm02
+    100080: CC_L_arm03
+    100082: CC_L_base01
+    100084: HANDS
+    100086: LH_01
+    100088: RH_01
+    100090: //RootNode
+    400000: Bn_L_arm01
+    400002: Bn_L_Index_A01
+    400004: Bn_L_Index_B01
+    400006: Bn_L_Index_C01
+    400008: Bn_L_Index_D01
+    400010: Bn_L_mid_A01
+    400012: Bn_L_mid_B01
+    400014: Bn_L_mid_C01
+    400016: Bn_L_palm01
+    400018: Bn_L_pinkie_A01
+    400020: Bn_L_pinkie_B01
+    400022: Bn_L_pinkie_C01
+    400024: Bn_L_ring_A01
+    400026: Bn_L_ring_B01
+    400028: Bn_L_ring_C01
+    400030: Bn_L_thumb_A01
+    400032: Bn_L_thumb_B01
+    400034: Bn_L_thumb_C01
+    400036: Bn_L_wrist_01
+    400038: Bn_R_arm01
+    400040: Bn_R_Index_A01
+    400042: Bn_R_Index_B01
+    400044: Bn_R_Index_C01
+    400046: Bn_R_Index_D01
+    400048: Bn_R_mid_A01
+    400050: Bn_R_mid_B01
+    400052: Bn_R_mid_C01
+    400054: Bn_R_palm01
+    400056: Bn_R_pinkie_A01
+    400058: Bn_R_pinkie_B01
+    400060: Bn_R_pinkie_C01
+    400062: Bn_R_ring_A01
+    400064: Bn_R_ring_B01
+    400066: Bn_R_ring_C01
+    400068: Bn_R_thumb_A01
+    400070: Bn_R_thumb_B01
+    400072: Bn_R_thumb_C01
+    400074: Bn_R_wrist_01
+    400076: CC_L_arm01
+    400078: CC_L_arm02
+    400080: CC_L_arm03
+    400082: CC_L_base01
+    400084: HANDS
+    400086: LH_01
+    400088: RH_01
+    400090: //RootNode
+    4300000: RH_01
+    4300002: LH_01
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: LH_01
+    13700002: RH_01
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
