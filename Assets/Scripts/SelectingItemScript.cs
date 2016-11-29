@@ -10,6 +10,10 @@ public class SelectingItemScript : MonoBehaviour {
 	private GameObject interactingObject;
 	private float maxDetectionDistance = 5.0f;
 	public GameObject defaultObject;
+	public GameObject lockedUI;
+
+	private GameObject lockedDoor;
+	private bool setLockedDoor;
 
 	void Update () {
 		if (gameObject.GetComponent<Camera>().isActiveAndEnabled == true) {
@@ -44,6 +48,15 @@ public class SelectingItemScript : MonoBehaviour {
 			interactingObject.transform.GetComponent<FurnatureInteractionScript> ().colliding = true;
 			interacting = true;
 		}
+		//Locked door
+		else if (selectedObject == "Locked Door") {
+			lockedDoor = interactingObject;
+			lockedDoor.GetComponentInChildren<SpriteRenderer> ().enabled = true;
+			setLockedDoor = true;
+		} else if (selectedObject != "Locked Door" && setLockedDoor == true) {
+			lockedDoor.GetComponentInChildren<SpriteRenderer> ().enabled = false;
+		}
+
 		//extra interactve items
 		else if (selectedObject == "Report" || selectedObject == "Comic" || selectedObject == "Late slip" && gameObject.GetComponent<ItemInteractionScript> ().inTrigger != true)
 		{
