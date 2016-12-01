@@ -33,9 +33,10 @@ public class FurnatureInteractionScript : MonoBehaviour {
 	private float startTime;
 	private float journeyLength;
 
-	public float smooth = 1f;
-	private Quaternion openRotation;
-	private Quaternion closeRotation;
+	private float rotationSpeed = 5;
+
+	private float rotationOpen;
+	private float rotationClosed;
 
 	// Use this for initialization
 	void Start () {
@@ -44,10 +45,11 @@ public class FurnatureInteractionScript : MonoBehaviour {
 		}
 
 		if (interactionType == "turn left") {
-			openAngle = 180.0f;
-			openRotation *=  Quaternion.AngleAxis(60, Vector3.up);
+			rotationOpen = rotationSpeed;
+			rotationClosed = rotationSpeed * -1.0f;
 		} else if (interactionType == "turn right") {
-			openAngle = 0.0f;
+			rotationOpen = rotationSpeed * -1.0f;
+			rotationClosed = rotationSpeed;
 		}
 	}
 	
@@ -117,12 +119,12 @@ public class FurnatureInteractionScript : MonoBehaviour {
 		}
 
 
-		//Cubbards
+		//Cupbards
 		else if ((interactionType == "turn left" || interactionType == "turn right")) {
 			if (colliding == true) {
 				if (Input.GetKeyDown (KeyCode.E) && open == false) {
 					if (opening == false) {
-//						startTime = Time.time;
+						startTime = Time.time;
 						opening = true;
 //						AudioSource audio = GetComponent<AudioSource> ();
 //						audio.clip = objectActivationSound;
@@ -147,23 +149,22 @@ public class FurnatureInteractionScript : MonoBehaviour {
 				}
 			}
 
-
-			//Open Drawers
+			//Open Cupbards
 			if (opening == true) {
-				transform.rotation= Quaternion.Lerp (transform.rotation, openRotation , 10 * smooth * Time.deltaTime);
+				interactingObject.transform.Rotate (Vector3.up, rotationOpen);
 			}
 
-			if (interactingObject.transform.rotation == openRotation) {
+			if (interactingObject.transform.rotation == endMarker.rotation) {
 				opening = false;
 				open = true;
 			}
 
-			//Close Drawers
+			//Close Cupbards
 			if (closing == true) {
-				
+				interactingObject.transform.Rotate (Vector3.up, rotationClosed);
 			}
 
-			if (interactingObject.transform.position == startMarker.position) {
+			if (interactingObject.transform.rotation == startMarker.rotation) {
 				closing = false;
 				open = false;
 			}
@@ -196,26 +197,5 @@ public class FurnatureInteractionScript : MonoBehaviour {
 			}
 		}
 		colliding = false;
-	}
-
-	void CodeHolder(){
-		//open
-		if (Input.GetKeyDown (KeyCode.E) && open == false) {
-			
-			open = true;
-		}
-		//close
-		else if (Input.GetKeyDown (KeyCode.E) && open == true) {
-			interactingObject.transform.eulerAngles = new Vector3 (0, 90.0f, 0);
-			open = false;
-		}
-
-		if (open == false) {
-			activateUI.SetActive (true);
-			deactivateUI.SetActive (false);
-		} else if (open == true) {
-			activateUI.SetActive (false);
-			deactivateUI.SetActive (true);
-		}
 	}
 }
