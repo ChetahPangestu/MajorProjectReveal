@@ -10,7 +10,7 @@ public class SelectingItemScript : MonoBehaviour {
 	private GameObject interactingObject;
 	private float maxDetectionDistance = 5.0f;
 	public GameObject defaultObject;
-	public GameObject lockedUI;
+
 
 	private GameObject lockedDoor;
 	private bool setLockedDoor;
